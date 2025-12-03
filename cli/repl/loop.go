@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/hampterl/Multitool/cli"
 )
 
 func Loop() {
@@ -23,7 +25,8 @@ func Loop() {
 
 		switch input {
 		case "1":
-			fmt.Println("Option 1 selected")
+			fmt.Println("Text to encode: ")
+			cli.UseBase64()
 		case "0":
 			fmt.Println("Exiting...")
 			return

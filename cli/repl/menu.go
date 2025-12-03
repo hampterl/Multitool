@@ -14,5 +14,5 @@ func Menu() {
 		"       |_|    \\                ____         /    /   \\ \n",
 		"                \\__        __/      \\ ____ /\n",
 		"                   _______\n")
-	fmt.Print("|1|: Start a new session\n|0|: Exit\n>")
+	fmt.Print("|1|: Base64 text encoding\n|0|: Exit\n>")
 }
