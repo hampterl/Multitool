@@ -10,7 +10,7 @@ import (
 	"github.com/hampterl/Multitool/internal/encodeDecode"
 )
 
-func UseBase64() {
+func UseHex() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 
@@ -23,26 +23,26 @@ func UseBase64() {
 	for {
 		switch enDecode {
 		case "1":
-			encodebase()
+			encodehex()
 			return
 		case "2":
-			decodebase()
+			decodehex()
 			return
 		default:
-			fmt.Println("Invalid option\n|1|: Encode text to base64\n|2|: Decode base64 to text\n>")
+			fmt.Println("Invalid option\n|1|: Encode text to hex\n|2|: Decode hex to text\n>")
 			return
 		}
 	}
 }
 
-func encodebase() {
+func encodehex() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Print("Text to encode: ")
 	scanner.Scan()
 
 	fmt.Print("Encoded text: ")
-	encodedText := encodeDecode.Base64Encode(scanner.Text())
+	encodedText := encodeDecode.HexEncode(scanner.Text())
 	fmt.Println(encodedText)
 
 	fmt.Print("Save txt into file? (y/n): ")
@@ -70,14 +70,14 @@ func encodebase() {
 	}
 }
 
-func decodebase() {
+func decodehex() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Print("Base64 text: ")
 	scanner.Scan()
 
 	fmt.Print("Decoded text: ")
-	decodedText := encodeDecode.Base64Decode(scanner.Text())
+	decodedText := encodeDecode.HexDecode(scanner.Text())
 	fmt.Println(decodedText)
 
 	fmt.Print("Save txt into file? (y/n): ")
