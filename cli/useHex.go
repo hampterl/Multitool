@@ -12,11 +12,9 @@ import (
 
 func UseHex() {
 	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
+	fmt.Print("|1|: Encode text with hex\n|2|: Decode hex to text\n|0|: Return to main menu\n> ")
 
-	if scanner.Text() == "" {
-		fmt.Println("No input provided")
-	}
+	scanner.Scan()
 
 	enDecode := strings.TrimSpace(scanner.Text())
 
@@ -28,9 +26,14 @@ func UseHex() {
 		case "2":
 			decodehex()
 			return
-		default:
-			fmt.Println("Invalid option\n|1|: Encode text to hex\n|2|: Decode hex to text\n>")
+		case "0":
+			fmt.Println("Press enter to return to main menu...")
 			return
+		default:
+			fmt.Print("Invalid option\n|1|: Encode text with hex\n|2|: Decode hex to text\n> ")
+			scanner.Scan()
+			enDecode = strings.TrimSpace(scanner.Text())
+			break
 		}
 	}
 }

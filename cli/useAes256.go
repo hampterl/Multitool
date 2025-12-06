@@ -8,38 +8,44 @@ import (
 	"strings"
 
 	"github.com/hampterl/Multitool/internal/createFiles"
-	"github.com/hampterl/Multitool/internal/encodeDecode"
+	"github.com/hampterl/Multitool/internal/crypto"
 )
 
 func UseAes256() {
 	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
+	fmt.Print("|1|: Encrypt text with aes256\n|2|: Decrypt aes256 to text\n|3|: Encrypt File with aes256\n|0|: Return to main menu\n> ")
 
-	if scanner.Text() == "" {
-		fmt.Println("No input provided")
-	}
+	scanner.Scan()
 
 	enDecode := strings.TrimSpace(scanner.Text())
 
 	for {
 		switch enDecode {
 		case "1":
-			encodeAes()
+			encryptAes()
 			return
 		case "2":
-			decodeAes()
+			decryptAes()
+			return
+		case "3":
+			encryptFile()
+			return
+		case "0":
+			fmt.Println("Press enter to return to main menu...")
 			return
 		default:
-			fmt.Println("Invalid option\n|1|: Encode text to hex\n|2|: Decode hex to text\n>")
-			return
+			fmt.Print("Invalid option\n|1|: Encrypt text with aes256\n|2|: Decrypt aes256 to text\n|3|: Encrypt File with aes256\n|0|: Return to main menu\n> ")
+			scanner.Scan()
+			enDecode = strings.TrimSpace(scanner.Text())
+			break
 		}
 	}
 }
 
-func encodeAes() {
+func encryptAes() {
 	scanner := bufio.NewScanner(os.Stdin)
 
-	fmt.Print("Aes Key(256 byte): ")
+	fmt.Print("Aes Key(16, 24, 32 bytes): ")
 	scanner.Scan()
 	key := scanner.Text()
 
@@ -48,7 +54,7 @@ func encodeAes() {
 	plaintext := strings.TrimSpace(scanner.Text())
 
 	fmt.Print("Encoded text (hex): \n>")
-	ciphertext, err := encodeDecode.EncryptAes(plaintext, []byte(key))
+	ciphertext, err := crypto.EncryptAes(plaintext, []byte(key))
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -82,10 +88,10 @@ func encodeAes() {
 	}
 }
 
-func decodeAes() {
+func decryptAes() {
 	scanner := bufio.NewScanner(os.Stdin)
 
-	fmt.Print("Aes Key(32 byte): ")
+	fmt.Print("Aes Key(16, 24, 32 bytes): ")
 	scanner.Scan()
 	key := scanner.Text()
 
@@ -96,7 +102,7 @@ func decodeAes() {
 	ciphertext, _ := hex.DecodeString(hexciphertext)
 
 	fmt.Print("Decoded text: ")
-	plaintext, err := encodeDecode.DecryptAes(ciphertext, []byte(key))
+	plaintext, err := crypto.DecryptAes(ciphertext, []byte(key))
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -126,4 +132,29 @@ func decodeAes() {
 			scanner.Scan()
 		}
 	}
+}
+
+func encryptFile() {
+	scanner := bufio.NewScanner(os.Stdin)
+
+	fmt.Print("Instructions in README.md!\n")
+	fmt.Print("DISCLAIMER: This WILL encrypt the file you chose! IF you lose your key and overwrite your original," +
+		" you will NOT be able to decrypt the file!\n" +
+		"Never share your key with anyone! Make a backup before encrypting! Use at own Risk!\n")
+
+	fmt.Print("Filepath: ")
+	scanner.Scan()
+	filepath := strings.TrimSpace(scanner.Text())
+
+	fmt.Print("Save location: ")
+	scanner.Scan()
+	savepath := strings.TrimSpace(scanner.Text()) + ".enc"
+
+	fmt.Print("Aes Key(16, 24, 32 bytes): ")
+	scanner.Scan()
+	key := scanner.Text()
+
+	crypto.EncryptFile(filepath, savepath, key)
+
+	fmt.Println("File encrypted! SAVE YOUR KEY!\nPress enter to return to main menu...")
 }

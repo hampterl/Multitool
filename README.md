@@ -1,31 +1,80 @@
-# PutPut
+### PutPut Multitool
 Multitool in golang by hampterl
+
+## Download
+Download latest release -> https://github.com/hampterl/Multitool/releases
+
+## On Windows
+1. Download `multi-tool-windows.exe`
+2. Open Command Prompt (Win + R → "cmd")
+3. Navigate to download folder: `cd Downloads`
+4. Run: `multi-tool-windows.exe `
+
+## Build from source
+# 1. Clone repository
+git clone https://github.com/hampterl/multi-tool
+cd multi-tool
+
+# 2. Build
+go build -ldflags="-s -w" -o putput_v1.0.exe
+
+# 3. Run
+./putput_v1.0.exe
+
+
 
 # In early development
 Base 64, Hex, Aes256 implementation
 
-# Getting Started
+## Getting Started
 This is a Command Line Tool, you have to open it in a terminal. E.g. cmd or powershell.
+When opened, you can choose between encoding/decoding and encryption/decryption. More will be added soon.
 
-When opened, you can use the commands:
-Base64: base64 [encode|decode] [string]
-Hex: hex [encode|decode] [string]
-Aes256: aes256 [encrypt|decrypt] [string]
+# Features
 
-After you choose a command, you have to choose between encoding or decoding.
-Then you have to type in the string you want to encode or decode.
-Afterwards you can save it into a file, with the filename you want. It gets saved in the same directory as the main.
+- Encoding/Decoding (Base64, Hex)
+- Encryption/Decryption (Aes256)
 
-In Aes256 you have to type in a password.
-It has to be either 16, 24 or 32 characters long.
-If you encrypt a string, it gets encrypted and printed in hex format.
+After you choose encoding/decoding, you can choose between Base64 and Hex. More options will be added soon.
+
+Then you have to choose the mode you want to use. Encode or Decode.
+Until now, only text can be encoded/decoded. Files and pictures are not supported yet.
+Result will be printed in the terminal.
+Afterwards you can save the result into a file, with the filename and kind of file you want. E.g. .txt .doc...
+The file gets saved in the same directory as the main. So Multitool/cmd/multi-tool/<here your file> and the main
+
+Press '0' to exit the program while in the menu and to go back to the main menu while in other modes.
+
+After you choose encryption/decryption, you can only choose Aes256 right now, more options will be added soon.
+
+Then you have to choose the mode you want to use. Encrypt text (it will encrypt to hex so it's readable) or decrypt text or file encryption.
+
+For encryption and decryption to text you have to first type in a password.
+It has to be either 16, 24 or 32 characters long. Important! It has to be that long else  
+it won't work and it will just print an error.
+
+Then you type in the text you want to encrypt/decrypt.
+The result will be printed in the terminal.
+Afterwards you can save the result into a file aswell, with the filename and kind of file you want. E.g. .txt .doc...
+The file gets saved in the same directory as the main. So Multitool/cmd/multi-tool/<here your file> and the main.
+
 If you want to decrypt, you have to type in the same password as the original encryption or it won't print the same string.
-Afterwards you can save it into a file, same as in Base64 and Hex.
+Then you can save the result into a file aswell.
 
-Use '0' to exit the program while in the menu.
+# File encryption
+DISCLAIMER and WARNING: This WILL encrypt the file you choose! IF you lose your key and overwrite your original, 
+you will NOT be able to decrypt the file! Never share your key with anyone! ALWAYS make a backup before encrypting! 
+IMPORTANT! Only encryption is supported right now! Without another tool, you won't be able to decrypt the file!
 
-## Authors
-hampterl
+## Legal Disclaimer
+USE FOR EDUCATIONAL PURPOSES ONLY!
+
+NEVER USE THIS TO ENCRYPT SENSITIVE DATA!
+
+THE DEVELOPER OF THIS TOOL IS NOT RESPONSIBLE FOR ANY DAMAGE BY MISSUSE! SEE LICENSE FOR MORE INFORMATION!
+
+## Author
+hampterl on github
 
 ## License
 

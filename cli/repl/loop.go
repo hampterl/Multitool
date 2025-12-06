@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/hampterl/Multitool/cli"
+	"github.com/hampterl/Multitool/cli/choose"
 )
 
 func Loop() {
@@ -25,14 +25,11 @@ func Loop() {
 
 		switch input {
 		case "1":
-			fmt.Print("|1|: Encode text to base64\n|2|: Decode base64 to text\n>")
-			cli.UseBase64()
+			fmt.Print("|1|: Base64\n|2|: Hex\n|0|: Back\n> ")
+			choose.ChooseEnDecode()
 		case "2":
-			fmt.Print("|1|: Encode text to hex\n|2|: Decode hex to text\n>")
-			cli.UseHex()
-		case "3":
-			fmt.Println("|1|: Encrypt text with AES-256\n|2|: Decrypt AES-256 encrypted text\n>")
-			cli.UseAes256()
+			fmt.Print("|1|: Aes256\n|2|: Comming Soon\n|0|: Back\n> ")
+			choose.ChooseEnDecryption()
 		case "0":
 			fmt.Println("Exiting...")
 			return
